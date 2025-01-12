@@ -1,0 +1,45 @@
+# Example .cursorrules for a Vite + React + Shadcn Project
+
+# Install Vite, React, and related dependencies
+postinstall: |
+  npm install vite react react-dom
+  npm i @shadcn/ui @radix-ui/react @tailwindcss/forms
+  npm install @vitejs/plugin-react @babel/preset-react
+
+setup:
+  - description: Initialize a Vite project with React and Shadcn
+    commands:
+      # Initialize Vite with React template
+      - npx create-vite@latest my-app --template react
+      - cd my-app
+
+  - description: Configure Tailwind CSS (if using for styling)
+    commands:
+      - npx tailwindcss init -p
+
+  - description: Configure Shadcn UI components
+    commands:
+      - mkdir -p src/components
+      - curl https://cdn.shadcn.com/ui.css > src/components/ui.css
+      - echo "@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');" > src/index.css
+      - echo "@import './components/ui.css';" >> src/index.css
+
+  # Ensure build and start commands function without errors
+  build:
+    description: Build the Vite project
+    commands:
+      - npm run build
+  start:
+    description: Start the Vite dev server
+    commands:
+      - npm run dev
+
+devDependencies:
+  - eslint
+  - prettier
+  - vite-plugin-esbuild
+  - @vitejs/plugin-react
+
+notes: |
+  Ensure your Node.js version is compatible with Vite (>=12.x is recommended).
+  Customize Shadcn and TailwindCSS configuration files as per your design guidelines.
